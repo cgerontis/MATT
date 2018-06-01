@@ -4,6 +4,8 @@ Constantinos Gerontis, June 2018
 */
 //Readline
 const readline = require('readline');
+var msg = '';
+var index = 0;
 
 // Serial port
 var SerialPort = require('serialport');
@@ -42,23 +44,22 @@ function start_homing() {
 // Then start routine
 setTimeout(start_loop, 30000);
 
-function start_loop() {setInterval(MATT_routine, stepTime);}
+function MATT_routine() {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+    rl.on('line', (input) => {
 
-  rl.question('Enter X: ', (answer) => {
+    index = input.indexOf(',');
 
-  msg = 'X-' + answer + '\r';
+    msg = 'X-' + input.slice(0,index) + '\n' + 'Y-' + input.slice(index+1, input.length) + '\r';
 
-  rl.question('Enter Y: ', (answer) => {
-
-  msg = msg + 'Y-' + answer + '\r';
-
-  rl.close();
-});
+    console.log(msg);
+    MATT_routine();
+  });
+  }
 
 
   port_xy.write(msg, function(err) {
