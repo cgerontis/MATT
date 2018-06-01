@@ -1,13 +1,18 @@
 const readline = require('readline');
+var msg = '';
+var index = 0;
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-rl.question('What do you think of Node.js? ', (answer) => {
-  // TODO: Log the answer in a database
-  console.log(`Thank you for your valuable feedback: ${answer}`);
+  rl.on('line', (input) => {
 
-  rl.close();
+  index = input.indexOf(',');
+
+  msg = 'X-' + input.slice(0,index) + '\n' + 'Y-' + input.slice(index+1, input.length) + '\r';
+
+  console.log(msg);
+
 });
