@@ -4,8 +4,6 @@ fopen(s);
 servalue = 'f';
 
 while(strcmp(servalue,'') == 0)           
-                              %you can change the vaalue of m to increase or decrease
-                              %the number of executions
 
 servalue= input('Enter the value 100 to turn ON LED & 101 to turn OFF LED :','s');
 
