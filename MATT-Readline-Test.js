@@ -55,11 +55,12 @@ function MATT_routine() {
 
     //index = input.indexOf(',');
 
-    msg = input[0] + '-' + input.slice(1,input.length) + '\r';
+    msg = input + '\r';
+    //msg = input[0] + '-' + input.slice(1,input.length) + '\r';
     //msg = 'X-' + input.slice(0,index) + '\n' + 'Y-' + input.slice(index+1, input.length) + '\r';
 
     console.log(msg);
-    port_xy.write(msg); 
+    port_xy.write(msg);
   });
   }
 
