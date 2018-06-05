@@ -1,6 +1,6 @@
 /*
-MATT-demo, routine
-Emily Lam, March 2018
+MATT-Array-Test, routine
+Constantinos Gerontis, June 2018
 */
 
 // Serial port
