@@ -18,5 +18,3 @@ while s.BytesAvailable > 0
 end
  
 end
-
-
