@@ -1,9 +1,7 @@
 %Windows - 'COM12'
 %Mac - '/dev/cu.usbmodem1421'
-MATT=serial('COM5','BaudRate',9600,'Terminator','CR/LF');
-PATT=serial('COM4','BaudRate',9600,'Terminator','CR/LF');
-
-% [1.8,4.2,7,11,15,22,33,61,75]
+MATT=serial('COM4','BaudRate',9600,'Terminator','CR/LF');
+PATT=serial('COM5','BaudRate',9600,'Terminator','CR/LF');
 
 %Open the serial line for both MATT and PATT
 fopen(MATT);
@@ -25,7 +23,7 @@ while strcmp(entered,'n') == 0
       fprintf(MATT,'$X\r\n'); %Unlocks control
       counter = 1;
   end
-    
+     
   %Check MATT output
   while MATT.BytesAvailable > 0
     rx = fgetl(MATT);
