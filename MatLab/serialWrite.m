@@ -8,10 +8,4 @@ function serialWrite(id,msg)
 fprintf(id,'%s\r\n',msg);
 pause(0.1);
   
-
-while id.BytesAvailable > 0
-    rx = fgetl(id);
-    disp(rx);
-end
-  
 end
