@@ -2,7 +2,8 @@ function maintainPosition(natnet, bodyID, MATT, MX, MY)
 %calling this function attemps to lock PATT in place by checking the
 %optitrack position instead of the MATT position
 %x and z are the desired optitrack z and x positions to be maintained
-    margin = 2; %margin of error in mm
+    margin = 5; %margin of error in mm
+    command = '';
     
     data = natnet.getFrame;
     desiredX = data.RigidBody(bodyID).x * 1000;
@@ -22,12 +23,12 @@ function maintainPosition(natnet, bodyID, MATT, MX, MY)
         
            % MX = MX - (z - desiredZ);
             %MY = MY - (x - desiredX);
-             MX = (z-desiredZ);
-             MY = (x-desiredX);
-            fprintf(MATT,'X%f',num2str(MX))
-            fprintf(MATT,'Y%f\r\n',num2str(MY))
-            fprintf('MX:%f\tMY:%f\n',[MX,MY])
+             MX = MX+(-1*(z-desiredZ));
+             MY = MY+(x-desiredX);
+             command = strcat('X',num2str(MX),'Y',num2str(MY));
+            fprintf(MATT,'%s\r\n',command)
+            fprintf('%s\r\n',command)
         end
-        pause(0.2)
+        pause(0.25)
     end
 end
