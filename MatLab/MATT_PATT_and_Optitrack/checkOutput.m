@@ -1,5 +1,7 @@
 function output = checkOutput(MATT,PATT)
 %Checks output for MATT and PATT
+
+%Initialize output
   output = '';
   
   %Check MATT output

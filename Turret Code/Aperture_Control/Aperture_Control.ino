@@ -5,16 +5,16 @@
 #include <ax12.h>
 #include <BioloidController.h>
 
-double apRatio = 200;
+double apRatio = -243;
 
 void moveAperture(int id, double desiredPosition)
 {
   
-  if(desiredPosition > 76)
+  if(desiredPosition > 50)
   {
     Serial.println("Value too high");
     return;
-  }else if (desiredPosition < 0)
+  }else if (desiredPosition < 1.8)
   {
     Serial.println("Value too low");
     return;
@@ -50,18 +50,18 @@ void moveAperture(int id, double desiredPosition)
 #include <ax12.h>
 #include <BioloidController.h>
 
-double calibrate(int id, int origin = 600)
+double calibrate(int id)
 {
     double offset;      //Offset of the servo position
     double pos;         //Later on saves servo position
     int load = 0;           //Later on saves servo load
-    int maxLoad = 66;   //Maximum load servo applies before giving up and declaring origin
+    int maxLoad = 100;   //Maximum load servo applies before giving up and declaring origin
     int fast = 800;
 
     ax12SetRegister2(id, 20, 0);
     ax12SetRegister2 (id , AX_CW_ANGLE_LIMIT_L, 0);
     ax12SetRegister2 (id , AX_CCW_ANGLE_LIMIT_L, 0);  
-    ax12SetRegister2 (id , AX_GOAL_SPEED_L,1023 +fast); 
+    ax12SetRegister2 (id , AX_GOAL_SPEED_L,fast); 
     ax12SetRegister2 (id , AX_TORQUE_LIMIT_L,250); 
 
     delay(200);
@@ -70,10 +70,10 @@ double calibrate(int id, int origin = 600)
     {
       load = ax12GetRegister(id , AX_PRESENT_LOAD_L,1);
       pos = GetPosition(id);
-      Serial.print("Position: ");
-      Serial.println(pos);
-      Serial.print("Load: ");
-      Serial.println(load);
+//      Serial.print("Position: ");
+//      Serial.println(pos);
+//      Serial.print("Load: ");
+//      Serial.println(load);
       delay(20);
     }
     Serial.println("Out");
@@ -89,22 +89,20 @@ double calibrate(int id, int origin = 600)
     delay(1000);
     pos = GetPosition(id);
     delay(500);
-    offset = -1*(pos+origin);
+    offset = (-1*pos)+(1.8*apRatio);
     Serial.print("offset: ");
     Serial.println(offset);
     ax12SetRegister2(id , 20, offset);
     delay(500);
-    ax12SetRegister2 (id ,AX_GOAL_POSITION_L, 0);
-    delay(500);
     ax12SetRegister2 (id , AX_TORQUE_LIMIT_L,1000); 
-
+    delay(50);
     return offset;
     
 }
 
 double getAperturePosition(int id)
 {
-  return GetPosition(id)/apRatio;
+  return (GetPosition(id)/apRatio);
 }
 
 

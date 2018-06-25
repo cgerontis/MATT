@@ -10,7 +10,7 @@ fprintf( 'natNetConnect Start\n' )
 	% modify for your network
 	fprintf( 'Connecting to the server\n' )
 	natnetclient.HostIP = '192.168.1.116';
-	natnetclient.ClientIP = '192.168.1.145';
+	natnetclient.ClientIP = '192.168.1.141';
 	natnetclient.ConnectionType = 'Multicast';
 	natnetclient.connect;
 	if ( natnetclient.IsConnected == 0 )

@@ -52,11 +52,14 @@ if(Serial.available() > 0)
 
    
     switch (axis){
+      case '\r':
+        break;
+      case '\n':
+        break;
       case 'H':
         Serial.println("Homing aperture");
         calibrate(ap);
-        break;
-        
+        break;   
       case '?':
         Serial.print("P.A.T: \t");
         Serial.print(getPanPosition(pan));

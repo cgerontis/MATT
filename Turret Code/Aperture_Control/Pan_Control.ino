@@ -12,16 +12,16 @@ void movePan(int id, double desiredPosition)
 {
   double ratio;
   
-//  if(desiredPosition > 200)
-//  {
-//    Serial.println("Value too high");
-//    return;
-//  }else if (desiredPosition < -5)
-//  {
-//    Serial.println("Value too low");
-//    return;
-//  }
-//  
+  if(desiredPosition > 185)
+  {
+    Serial.println("Value too high");
+    return;
+  }else if (desiredPosition < -5)
+  {
+    Serial.println("Value too low");
+    return;
+  }
+  
   desiredPosition = desiredPosition*panRatio;  //Converting the commanded position from degrees to values, which can be sent to servo
   
   ax12SetRegister2 (id , AX_GOAL_POSITION_L, desiredPosition);
@@ -32,6 +32,6 @@ void movePan(int id, double desiredPosition)
 
 double getPanPosition(int id)
 {
-  return GetPosition(id);
+  return (GetPosition(id)/panRatio);
 }
 
