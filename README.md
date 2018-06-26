@@ -14,7 +14,7 @@ Folders:
 2)GNU Radio Control
 3)Matlab
 4)PATT Control
-5)Turret Design
+5)PATT Design
 
 1)Arduino
 The contents of this folder are the ArbotiX Sketches, drivers, hardware, and libraries.
@@ -60,7 +60,7 @@ requires folder 1(Arduino) to be installed properly. The three files included in
   This file initiates and maintains serial communication with a connected device or computer and also
   controls the tilt axis and specifies the offset.
   
-5)Turret Design
-This folder has the turret(PATT) solidworks design as well as the corresponding STL files. This includes
+5)PATT Design
+This folder has the PATT solidworks design as well as the corresponding STL files. This includes
 PATT Mk1 and PATT Mk2. PATT Mk1 used the 75mm "Zero-aperture" iris, and Mk2 uses the 50mm iris.
 
