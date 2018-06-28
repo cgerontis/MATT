@@ -5,7 +5,7 @@
 #include <ax12.h>
 #include <BioloidController.h>
 
-double panRatio = 1024/90; //Ratio of values/degree. The current setup is 11.37 values/mm
+double panRatio = 1024/87.5; //Ratio of values/degree. The current setup is 11.37 values/mm
 
  
 void movePan(int id, double desiredPosition)

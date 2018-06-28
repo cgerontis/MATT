@@ -17,7 +17,7 @@ function NatNetPollingSample
 	% modify for your network
 	fprintf( 'Connecting to the server\n' )
 	natnetclient.HostIP = '192.168.1.116';
-	natnetclient.ClientIP = '192.168.1.145';
+	natnetclient.ClientIP = '192.168.1.141';
 	natnetclient.ConnectionType = 'Multicast';
 	natnetclient.connect;
 	if ( natnetclient.IsConnected == 0 )
@@ -46,7 +46,7 @@ function NatNetPollingSample
 		end
 		%fprintf( 'Frame:%6d  ' , data.Frame )
 		%fprintf( 'Time:%0.2f\n' , data.Timestamp )
-        clc;
+        %clc;
 		for i = 1:model.RigidBodyCount
 			fprintf( 'Name:"%s"  ', model.RigidBody( i ).Name )
 			fprintf( 'X:%0.1fmm  ', data.RigidBody( i ).x * 1000 )

@@ -1,4 +1,4 @@
-function gnuSequence(natnet, bodyID, MATT, PATT, GNU,filename)
+function gnuSequenceComplex(natnet, bodyID, MATT, PATT, GNU,filename)
 %This function reads an excel file and  runs through the specified path
 %The columnd should be in the following order:
 %(A-X coordinate)(B-Z coordinate)(C-Pitch angle)(D-Aperture diam.)
@@ -7,48 +7,12 @@ matrix = xlsread(filename);
 
 fopen(GNU)
 
-readX = matrix(1:end,1);
-readZ = matrix(1:end,2);
-readP = matrix(1:end,3);
-readA = matrix(1:end,4);
-readT = matrix(1:end,5);
-readDelay = matrix(1:end,6);
-
-readX(find(isnan(readX)))=[];
-readZ(find(isnan(readZ)))=[];
-readP(find(isnan(readP)))=[];
-readA(find(isnan(readA)))=[];
-readT(find(isnan(readT)))=[];
-readDelay(find(isnan(readDelay)))=[];
-
-
-X = [];
-Z = [];
-P = [];
-A = [];
-T = [];
-delay = [];
-
-for x = 1:length(readX)
-    for z = 1:length(readZ)
-        for p = 1:length(readP)
-            for a = 1:length(readA)
-                for t = 1:length(readT)
-                    for d = 1:length(readDelay)
-                       X(end+1) = readX(x);
-                       Z(end+1) = readZ(z);
-                       P(end+1) = readP(p);
-                       A(end+1) = readA(a);
-                       T(end+1) = readT(t);
-                       delay(end+1) = readDelay(d);
-                    end
-                end
-            end
-        end
-    end
-end
-
-
+X = matrix(1:end,1);
+Z = matrix(1:end,2);
+P = matrix(1:end,3);
+A = matrix(1:end,4);
+T = matrix(1:end,5);
+delay = matrix(1:end,6);
 
 %Define the location where the timestamp will be saved in the excel sheet
 timestampLocation = strcat('G',num2str(2),':G',num2str(length(X)+1));

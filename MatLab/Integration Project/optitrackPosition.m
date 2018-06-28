@@ -24,17 +24,17 @@ function optitrackPosition(natnet, bodyID, MATT,desiredX,desiredZ)
 %         fprintf('Current X: %d\n',x)
 %         fprintf('Current Z: %d\n',z)
      
-        if(NatNetIsMoving(natnet,1,1) == 0 && (abs(desiredX-x) > margin || abs(desiredZ-z) > margin))
+        if(NatNetIsMoving(natnet,1,1) == 0 && isempty(data.RigidBody(1)) == 0 && (abs(desiredX-x) > margin || abs(desiredZ-z) > margin))
         
            % MX = MX - (z - desiredZ);
             %MY = MY - (x - desiredX);
-             MX = MX+(-1*(z-desiredZ));
-             MY = MY+(x-desiredX);
+             MX = MX+(z-desiredZ);
+             MY = MY+(-1*(x-desiredX));
              command = '';
              command = strcat('X',num2str(MX),'Y',num2str(MY));
             fprintf(MATT,'%s\r\n',command)
             fprintf('%s\r\n',command)
-            pause(0.5)
+            pause(1)
         end
         pause(0.1)
     end

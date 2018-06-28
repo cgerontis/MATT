@@ -1,20 +1,21 @@
 /***************************
  * Aperture Control
  * 0 is 0 and 15000 is 75mm, so 200 ticks is 1mm
+ * ratio for 50mm aperture is -243
  ***************************/
 #include <ax12.h>
 #include <BioloidController.h>
 
-double apRatio = -243;
+double apRatio = 200;
 
 void moveAperture(int id, double desiredPosition)
 {
   
-  if(desiredPosition > 50)
+  if(desiredPosition > 80)
   {
     Serial.println("Value too high");
     return;
-  }else if (desiredPosition < 1.8)
+  }else if (desiredPosition < 0)
   {
     Serial.println("Value too low");
     return;
@@ -55,13 +56,13 @@ double calibrate(int id)
     double offset;      //Offset of the servo position
     double pos;         //Later on saves servo position
     int load = 0;           //Later on saves servo load
-    int maxLoad = 100;   //Maximum load servo applies before giving up and declaring origin
+    int maxLoad = 60;   //Maximum load servo applies before giving up and declaring origin
     int fast = 800;
 
     ax12SetRegister2(id, 20, 0);
     ax12SetRegister2 (id , AX_CW_ANGLE_LIMIT_L, 0);
     ax12SetRegister2 (id , AX_CCW_ANGLE_LIMIT_L, 0);  
-    ax12SetRegister2 (id , AX_GOAL_SPEED_L,fast); 
+    ax12SetRegister2 (id , AX_GOAL_SPEED_L,1023+fast); 
     ax12SetRegister2 (id , AX_TORQUE_LIMIT_L,250); 
 
     delay(200);

@@ -2,7 +2,7 @@
 
 %Windows - 'COM12'
 %Mac - '/dev/cu.usbmodem1421'
-% try
+try
     MATT=serial('COM5','BaudRate',9600,'Terminator','CR/LF');
     PATT=serial('COM4','BaudRate',9600,'Terminator','CR/LF');
     GNU = tcpip('192.168.1.145', 5000,'Terminator','CR'); 
@@ -24,8 +24,10 @@
     end
 
     pause(0.5);
-
-    fprintf(PATT,'H\r\n');
+    fprintf(PATT,'\r\n');
+    pause(1);
+    home = "H";
+    
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     
     %The following segnment unlocks MATT commands
@@ -83,17 +85,18 @@
     %restarted
     fclose(MATT);
     fclose(PATT);
+    fclose(GNU);
     fclose('all');
 
     disp("Ports and files closed");
     
-% catch ME
-%     %Close MATT and PATT before ending the program if an error occurs. This
-%     %is necessary because if any ports are left open, Matlab must be
-%     %restarted
-%     fclose(MATT);
-%     fclose(PATT);
-%     fclose('all');
-% 
-%     error(ME.message);
-% end
+catch ME
+    %Close MATT and PATT before ending the program if an error occurs. This
+    %is necessary because if any ports are left open, Matlab must be
+    %restarted
+    fclose(MATT);
+    fclose(PATT);
+    fclose('all');
+    disp("Ports and files closed after error:");
+    error(ME.message);
+end

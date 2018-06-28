@@ -35,7 +35,7 @@ function commandFilter(MATT,PATT,GNU,command,natnet, bodyID)
     pause(0.1);
     
     %Calls function to maintain position
-    maintainPosition(natnet,bodyID,MATT)
+    maintainPosition(natnet,bodyID,MATT,str2num(command(2:end)))
  
     pause(0.1);
   end
@@ -46,11 +46,12 @@ function commandFilter(MATT,PATT,GNU,command,natnet, bodyID)
     pause(0.1);
     
     %Checks input for desired location. The format must be the following:
-    %(letter O, not zero)-> 'OX,Z'
+    %(letter O, not zero)-> 'OZ,X'
     %Example:
-    %'O42,17' would result in the Optitrack position X=42,Z=17
-    desiredX = str2num(command(strfind(command,'O')+1:strfind(command,',')));
-    desiredZ = str2num(command(strfind(command,',')+1:end));
+    %'O42,17' would result in the Optitrack position X=170,Z=420
+    %(centimeters)
+    desiredZ = str2num(command(strfind(command,'O')+1:strfind(command,',')))*10;
+    desiredX = str2num(command(strfind(command,',')+1:end))*10;
     
     %Calls function to maintain position
     optitrackPosition(natnet,bodyID,MATT,desiredX,desiredZ)
@@ -95,6 +96,24 @@ function commandFilter(MATT,PATT,GNU,command,natnet, bodyID)
     
     %Calls function to start sequence
     gnuSequence(natnet, bodyID, MATT, PATT, GNU, filename)
+ 
+    pause(0.1);
+  end
+  
+  if(letter == 'C')
+
+    pause(0.1);
+    
+    if length(command) > 1
+        filename = command(2:end);
+        disp('Running')
+        disp(filename)
+    else 
+        disp('You forgot to enter a filename');
+    end
+    
+    %Calls function to start sequence
+    gnuSequenceComplex(natnet, bodyID, MATT, PATT, GNU, filename)
  
     pause(0.1);
   end
