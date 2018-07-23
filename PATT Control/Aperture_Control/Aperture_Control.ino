@@ -6,10 +6,19 @@
 #include <ax12.h>
 #include <BioloidController.h>
 
-double apRatio = 200;
+double apRatio50 = -243;
+double apRatio75 = 200;
 
-void moveAperture(int id, double desiredPosition)
+void moveAperture(int id, double desiredPosition, int diam)
 {
+  int apRatio;
+  if(diam == 75)
+  {
+    apRatio = apRatio75;
+  }else
+  {
+    apRatio = apRatio50;
+  }
   
   if(desiredPosition > 80)
   {
@@ -51,18 +60,30 @@ void moveAperture(int id, double desiredPosition)
 #include <ax12.h>
 #include <BioloidController.h>
 
-double calibrate(int id)
+double calibrate(int id,int diam)
 {
+
+  
     double offset;      //Offset of the servo position
     double pos;         //Later on saves servo position
     int load = 0;           //Later on saves servo load
     int maxLoad = 60;   //Maximum load servo applies before giving up and declaring origin
-    int fast = 800;
+    int fast = 0;
+    int apRatio = 0;
+    if(diam == 75)
+    {
+      apRatio = apRatio75;
+      fast = 1800;
+    }else
+    {
+      apRatio = apRatio50;
+      fast = 800;
+    }
 
     ax12SetRegister2(id, 20, 0);
     ax12SetRegister2 (id , AX_CW_ANGLE_LIMIT_L, 0);
     ax12SetRegister2 (id , AX_CCW_ANGLE_LIMIT_L, 0);  
-    ax12SetRegister2 (id , AX_GOAL_SPEED_L,1023+fast); 
+    ax12SetRegister2 (id , AX_GOAL_SPEED_L, fast); 
     ax12SetRegister2 (id , AX_TORQUE_LIMIT_L,250); 
 
     delay(200);
@@ -101,9 +122,17 @@ double calibrate(int id)
     
 }
 
-double getAperturePosition(int id)
+double getAperturePosition(int id,int diam)
 {
-  return (GetPosition(id)/apRatio);
+  int apRatio;
+  if(diam == 75)
+  {
+    apRatio = apRatio75;
+  }else
+  {
+    apRatio = apRatio50;
+  }
+  return (GetPosition(id)/apRatio50);
 }
 
 

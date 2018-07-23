@@ -51,7 +51,7 @@ while strcmp(command,'n') == 0
   command = input('Enter commands: ','s');
      
   %Call commandFilter to sort and send commands
-  commandFilter(MATT,PATT,command);
+  commandFilter(MATT,PATT,0,command,0,0);
   pause(0.1);
   %NatNetCollect(natnet);
   

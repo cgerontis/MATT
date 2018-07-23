@@ -7,6 +7,7 @@ int pan = 1;
 int ap = 2;
 int tilt = 16;
 int tiltOffset = 7;
+int diam = 50;
 
 float command;
 int axis;
@@ -57,21 +58,28 @@ if(Serial.available() > 0)
       case '\n':
         break;
       case 'H':
+        if(command == 75)
+        {
+          diam = 75;
+        }else if(command == 50)
+        {
+          diam = 50;
+        }
         Serial.println("Homing aperture");
-        calibrate(ap);
+        calibrate(ap,diam);
         break;   
       case '?':
         Serial.print("P.A.T: \t");
         Serial.print(getPanPosition(pan));
         Serial.print("\t,");
-        Serial.print(getAperturePosition(ap));
+        Serial.print(getAperturePosition(ap,diam));
         Serial.print("\t,");
         Serial.println(tiltServo.read()-(90+tiltOffset));
       case 'P':
         movePan(pan, command);
         break;
       case 'A':
-        moveAperture(ap, command); 
+        moveAperture(ap, command,diam); 
         break;
       case 'T':
         command = command+tiltOffset;
