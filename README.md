@@ -27,8 +27,8 @@ folders on your computer, along with whatever other files you had.
 
 2)GNU Radio Control
 The files in GNU Radio Control are the necessary scripts to have on whatever computer will be 
-running GNU Radio. The two files must be placed in the same folder and you must have GNU radio
-installed in the Ubuntu environment you'll be using. Whatever folder contains these two files
+running GNU Radio. The two files must be placed in the same folder and you must have GNU radio 
+companion installed in the Ubuntu environment you'll be using. Whatever folder contains these two files
 will also be automatically filled with the files created at each point during data collection.
 
 3)Matlab
