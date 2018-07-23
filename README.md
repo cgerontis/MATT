@@ -13,8 +13,9 @@ Folders:
 1)Arduino
 2)GNU Radio Control
 3)Matlab
-4)PATT Control
-5)PATT Design
+4)Optitrack Files
+5)PATT Control
+6)PATT Design
 
 1)Arduino
 The contents of this folder are the ArbotiX Sketches, drivers, hardware, and libraries.
@@ -45,8 +46,12 @@ This folder has 2 sub-folders:1)Arduino Communication and 2)Integration Project.
   "GOMP" is the more advanced version which includes communication with another computer running GNU 
   Radio. The script "MATTandPATT_keyboard_control_2.m" can also be used to control MATT and PATT using
   individual commands through the keyboard without Optitrack.
+  
+4)Optitrack Files
+This folder contains the necessarry calibration files for GOMP to run. These files are to be used with
+the "Motive" software
 
-4)PATT Control
+5)PATT Control
 This folder includes the arduino files necessary for PATT(Pan Aperture Tilt Turret) to run. This code
 requires folder 1(Arduino) to be installed properly. The three files included in PATT Control are:
 1)Aperture_Control,2)Pan_Control,3)Serial_Communication. 
@@ -60,7 +65,7 @@ requires folder 1(Arduino) to be installed properly. The three files included in
   This file initiates and maintains serial communication with a connected device or computer and also
   controls the tilt axis and specifies the offset.
   
-5)PATT Design
+6)PATT Design
 This folder has the PATT solidworks design as well as the corresponding STL files. This includes
 PATT Mk1 and PATT Mk2. PATT Mk1 used the 75mm "Zero-aperture" iris, and Mk2 uses the 50mm iris.
 
