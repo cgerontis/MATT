@@ -3,7 +3,8 @@ function optitrackSequence(natnet, bodyID, MATT, PATT, filename)
 %The columnd should be in the following order:
 %(A-X coordinate)(B-Z coordinate)(C-Pitch angle)(D-Aperture diam.)
 %(E-Tilt angle)(F-delay before next step in seconds)
-matrix = xlsread(filename);
+%Check file named "Format.xlsx" in "Sequences" folder
+matrix = xlsread("Sequences/"+filename);
 
 X = matrix(1:end,1);
 Z = matrix(1:end,2);

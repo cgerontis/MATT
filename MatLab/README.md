@@ -1,5 +1,12 @@
 This file explains the use of GOMP(GNU_Radio Optitrack MATT and PATT)
 
+The first thing you have to do to ensure a connection is to start Optitrack, connect the
+main laptop (the one MATLAB will run on) to the network Optitrack is connected to through
+ethernet, an enter your IP adress in the ClientIP (in NatNetConnect.m). Then connect to 
+MATT and PATT through USB and enter the correct serial ports at the top of GOMP.m. Lastly,
+enter the correct IP adress for the computer running GNU-Radio, which should also be on the 
+same network and running GOMP.py
+
 The two folders in this folder are "Arduino communication" and "Integration project":
 
 Arduino communication:
@@ -33,4 +40,10 @@ to Optitrack is established. GOMP uses a command prompt interface and accepts th
 "GFilename" -Initiates the sequence specified in the "Filename" excel sheet(eg. "Gpotato.xlsx" initiates the "potato.xlsx" sequence)
 "CFilename" -Similar to above command, but each line in excel is a unique command. This is helpful if you don't want a pattern
 "SFilename" -Similar to "GFilename", but this sequence doesn't record data using GNU-Radio. This is more helpful for demos
+
+/////////////////////////IMPORTANT\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+WHEN TRYING TO RUN A SEQUENCE, YOU MUST PLACE THE EXCEL SHEETS
+WITH THE INSTRUCTIONS IN THE "SEQUENCES" FOLDER, WITHIN THE 
+MATLAB "INTEGRATION PROJECT" FOLDER. THERE IS AN EXAMPLE WITH
+THE PROPER FORMAT IN THE FOLDER ALREADY NAMED "FORMAT.XLSX"
 
