@@ -35,7 +35,7 @@ function NatNetPollingSample
 
 	% Poll for the rigid body data a regular intervals (~1 sec) for 10 sec.
 	fprintf( '\nPrinting rigid body frame data approximately every second for 10 seconds...\n\n' )
-	for idx = 1 : 10000  
+	for idx = 1 : 1000
 		java.lang.Thread.sleep(20);
 		data = natnetclient.getFrame; % method to get current frame
 		
@@ -47,12 +47,15 @@ function NatNetPollingSample
 		%fprintf( 'Frame:%6d  ' , data.Frame )
 		%fprintf( 'Time:%0.2f\n' , data.Timestamp )
         %clc;
-		for i = 1:model.RigidBodyCount
-			fprintf( 'Name:"%s"  ', model.RigidBody( i ).Name )
-			fprintf( 'X:%0.1fmm  ', data.RigidBody( i ).x * 1000 )
-			fprintf( 'Y:%0.1fmm  ', data.RigidBody( i ).y * 1000 )
-			fprintf( 'Z:%0.1fmm\n', data.RigidBody( i ).z * 1000 )			
-		end
+% 		for i = 1:model.RigidBodyCount           
+% 			fprintf( 'Name:"%s"  ', model.RigidBody( i ).Name )
+% 			fprintf( 'X:%0.1fmm  ', data.RigidBody( i ).x * 1000 )
+% 			fprintf( 'Y:%0.1fmm  ', data.RigidBody( i ).y * 1000 )
+% 			fprintf( 'Z:%0.1fmm\n', data.RigidBody( i ).z * 1000 )			
+% 		end
+        if(data.RigidBody(1).MeanError ~= 0)
+            fprintf('Mean Error:%0.5fmm\n',data.RigidBody(1).MeanError)
+        end
 	end 
 	disp('NatNet Polling Sample End' )
 end

@@ -5,7 +5,7 @@ try
     PATT=serial('COM4','BaudRate',9600,'Terminator','CR/LF');
     bodyID = 1; %The bodyID variable is the ID of the Rigid Body which is 
                 %attached to PATT in Motive
-
+ 
     %Open the serial line for both MATT and PATTT0
     fopen(MATT);
     fopen(PATT);

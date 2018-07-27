@@ -6,15 +6,50 @@ function optitrackSequence(natnet, bodyID, MATT, PATT, filename)
 %Check file named "Format.xlsx" in "Sequences" folder
 matrix = xlsread("Sequences/"+filename);
 
-X = matrix(1:end,1);
-Z = matrix(1:end,2);
-P = matrix(1:end,3);
-A = matrix(1:end,4);
-T = matrix(1:end,5);
-delay = matrix(1:end,6);
+readX = matrix(1:end,1);
+readZ = matrix(1:end,2);
+readP = matrix(1:end,3);
+readA = matrix(1:end,4);
+readT = matrix(1:end,5);
+readDelay = matrix(1:end,6);
+
+readX(find(isnan(readX)))=[];
+readZ(find(isnan(readZ)))=[];
+readP(find(isnan(readP)))=[];
+readA(find(isnan(readA)))=[];
+readT(find(isnan(readT)))=[];
+readDelay(find(isnan(readDelay)))=[];
+
+
+X = [];
+Z = [];
+P = [];
+A = [];
+T = [];
+delay = [];
+
+for x = 1:length(readX)
+    for z = 1:length(readZ)
+        for p = 1:length(readP)
+            for a = 1:length(readA)
+                for t = 1:length(readT)
+                    for d = 1:length(readDelay)
+                       X(end+1) = readX(x);
+                       Z(end+1) = readZ(z);
+                       P(end+1) = readP(p);
+                       A(end+1) = readA(a);
+                       T(end+1) = readT(t);
+                       delay(end+1) = readDelay(d);
+                    end
+                end
+            end
+        end
+    end
+end
+
 
 %Define the location where the timestamp will be saved in the excel sheet
-timestampLocation = strcat('G',num2str(2),':G',num2str(length(X)+1));
+%timestampLocation = strcat('G',num2str(2),':G',num2str(length(X)+1));
 
     command = '';
 
@@ -33,14 +68,21 @@ timestampLocation = strcat('G',num2str(2),':G',num2str(length(X)+1));
         command = strcat('O',num2str(X(i)),',',num2str(Z(i)));
         commandFilter(MATT,PATT,0,command,natnet,bodyID);
         
+        pause(0.5)
+        
+        %Keep checking if PATT got to the right position yet
+        %The last input is the margin for PATT location
+        while NatNetIsMoving(natnet, bodyID, 5)
+            pause(0.1)
+        end
+        
         pause(delay(i))
-        disp("made it")
-        %Create a timestamp at the end of each step
-        timestamp(i) = exceltime(datetime('now','TimeZone','local',...
-            'Format','d-MMM-y HH:mm:ss:ms'));
+%         %Create a timestamp at the end of each step
+%         timestamp(i) = exceltime(datetime('now','TimeZone','local',...
+%             'Format','d-MMM-y HH:mm:ss:ms'));
     end
     %Write the timestamp array next to the sequence in the sheet
-    xlswrite(filename,timestamp',timestampLocation);
+%    xlswrite(filename,timestamp',timestampLocation);
     pause(0.5)
     fclose('all')
 end

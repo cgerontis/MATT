@@ -94,7 +94,7 @@ timestampLocation = strcat('G',num2str(2),':G',num2str(length(X)+1));
         
     end
     %Write the timestamp array next to the sequence in the sheet
-    xlswrite(filename,timestamp',timestampLocation);
+%    xlswrite(filename,timestamp',timestampLocation);
     quit = "quit";
     fprintf(GNU,"%s",quit)
     pause(0.5)

@@ -5,8 +5,8 @@
 
 int pan = 1;
 int ap = 2;
-int tilt = 16;
-int tiltOffset = 7;
+int tilt = 23;
+int tiltOffset = 10;
 int diam = 50;
 
 float command;
@@ -22,7 +22,7 @@ Servo tiltServo;
 /**************************************/
 void setup(){ 
 
-  tiltServo.attach(16);
+  tiltServo.attach(tilt);
   tiltServo.write(90+tiltOffset);
   Serial.begin(9600);   // begin Serial communication with Arduino
 
@@ -82,12 +82,12 @@ if(Serial.available() > 0)
         moveAperture(ap, command,diam); 
         break;
       case 'T':
-        command = command+tiltOffset;
-        if(command > 90)
+        command = (command*1.1)+tiltOffset;
+        if(command > 80)
         {
           Serial.println("Value too high");
           break ;
-        }else if (command < -90)
+        }else if (command < -80)
         {
            Serial.println("Value too low");
            break ;
