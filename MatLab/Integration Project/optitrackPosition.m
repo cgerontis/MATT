@@ -34,10 +34,10 @@ function optitrackPosition(natnet, bodyID, MATT,desiredX,desiredZ)
            % MX = MX - (z - desiredZ);
             %MY = MY - (x - desiredX);
             
-            if(data.RigidBody(1).MeanError ~= 0)
-                offsetX =  MX + z;
-                offsetY = MY - x;
-            end
+            
+            offsetX =  MX + z;
+            offsetY = MY - x;
+            
 
             MX = offsetX - desiredZ;
             MY = offsetY + desiredX;

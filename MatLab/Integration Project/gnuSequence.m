@@ -8,8 +8,8 @@ matrix = xlsread("Sequences/"+filename);
 
 fopen(GNU)
 
-readX = matrix(1:end,1);
-readZ = matrix(1:end,2);
+readX = matrix(1:end,2);
+readZ = matrix(1:end,1);
 readP = matrix(1:end,3);
 readA = matrix(1:end,4);
 readT = matrix(1:end,5);
