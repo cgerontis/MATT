@@ -121,7 +121,14 @@ double calibrate(int id,int diam)
     Serial.print("offset: ");
     Serial.println(offset);
     ax12SetRegister2(id , 20, offset);
-    ax12SetRegister2 (2 , AX_GOAL_POSITION_L, 0);
+    delay(50);
+    if(diam = 75)
+    {
+      ax12SetRegister2 (2 , AX_GOAL_POSITION_L, 0);
+    }else
+    {
+      ax12SetRegister2 (2 , AX_GOAL_POSITION_L, apRatio*1.8);
+    }
     delay(500);
     ax12SetRegister2 (id , AX_TORQUE_LIMIT_L,1000); 
     delay(50);

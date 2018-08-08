@@ -8,8 +8,8 @@ matrix = xlsread("Sequences/"+filename);
 
 fopen(GNU)
 
-readX = matrix(1:end,2);
-readZ = matrix(1:end,1);
+readX = matrix(1:end,1);
+readZ = matrix(1:end,2);
 readP = matrix(1:end,3);
 readA = matrix(1:end,4);
 readT = matrix(1:end,5);
@@ -49,7 +49,15 @@ for x = 1:length(readX)
     end
 end
 
+%THIS SECTION CREATES THE S SHAPE INSTEAD OF THE Z SHAPE,
+%IF YOU'D LIKE THE REGULAR Z SHAPE (ROW BY ROW), COMMENT THIS SECTION OUT
+len =  length(readZ) * length(readP) * length(readA) * length(readT) * length(readDelay);
 
+if(length(Z) > len*2)
+    for i = 1:len*2:length(Z)
+        Z(i+len:i+len*2-1) = fliplr(Z(i+len:i+len*2-1));   
+    end
+end
 
 %Define the location where the timestamp will be saved in the excel sheet
 timestampLocation = strcat('G',num2str(2),':G',num2str(length(X)+1));
