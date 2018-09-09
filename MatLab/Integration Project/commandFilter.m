@@ -1,4 +1,4 @@
-function commandFilter(MATT,PATT,GNU,command,natnet, bodyID)
+function commandFilter(MATT,PATT,GNU,command,natnet, bodyID, Optitrack_Status)
   %Filter commands to send to MATT or PATT
   
   %Check first character
@@ -30,7 +30,7 @@ function commandFilter(MATT,PATT,GNU,command,natnet, bodyID)
   end
   
   %Calls 'maintainPosition' function (rarely used)
-  if(letter == 'M')
+  if(letter == 'M' && Optitrack_Status == 'y')
 
     pause(0.1);
     
@@ -41,7 +41,7 @@ function commandFilter(MATT,PATT,GNU,command,natnet, bodyID)
   end
   
   %Calls optitrack position function(Moves to specified optitrack position)
-  if(letter == 'O')
+  if(letter == 'O' && Optitrack_Status == 'y')
 
     pause(0.1);
     
@@ -64,7 +64,7 @@ function commandFilter(MATT,PATT,GNU,command,natnet, bodyID)
   %'Sfilename'
   %Example:
   %'STest.xlsx' would run the sequence specified in the file 'Test.xlsx'
-  if(letter == 'S')
+  if(letter == 'S' && Optitrack_Status == 'y')
 
     pause(0.1);
     
@@ -82,7 +82,7 @@ function commandFilter(MATT,PATT,GNU,command,natnet, bodyID)
     pause(0.1);
   end
   
-  if(letter == 'G')
+  if(letter == 'G' && Optitrack_Status == 'y')
 
     pause(0.1);
     
@@ -100,7 +100,7 @@ function commandFilter(MATT,PATT,GNU,command,natnet, bodyID)
     pause(0.1);
   end
   
-  if(letter == 'C')
+  if(letter == 'C' && Optitrack_Status == 'y')
 
     pause(0.1);
     

@@ -1,6 +1,6 @@
 %Windows - 'COM12'
 %Mac - '/dev/cu.usbmodem1421'
-MATT=serial('COM4','BaudRate',9600,'Terminator','CR/LF');
+MATT=serial('COM7','BaudRate',9600,'Terminator','CR/LF');
 
 a = '';
 

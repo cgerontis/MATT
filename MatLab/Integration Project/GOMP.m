@@ -3,8 +3,9 @@
 %Windows - 'COM12'
 %Mac - '/dev/cu.usbmodem1421'
 try
+    Optitrack_Status = input('Optitrack?[y/n]:\n ','s');
     MATT=serial('COM5','BaudRate',9600,'Terminator','CR/LF');
-    PATT=serial('COM4','BaudRate',9600,'Terminator','CR/LF');
+    PATT=serial('COM6','BaudRate',9600,'Terminator','CR/LF');
     GNU = tcpip('192.168.1.145', 5000,'Terminator','CR'); 
     bodyID = 1; %The bodyID variable is the ID of the Rigid Body which is 
                 %attached to PATT in Motive
@@ -55,7 +56,11 @@ try
     command= '';
 
     %Initialize NatNet
-    natnet = NatNetConnect();
+    if(Optitrack_Status == 'y')
+        natnet = NatNetConnect();
+    else
+        natnet = 0;
+    end
 
     %Short pause to ensure everything is synced
     pause(0.5);
@@ -70,13 +75,17 @@ try
       command = input('Enter commands: ','s');
 
       %Call commandFilter to sort and send commands to MATT and PATT
-      commandFilter(MATT,PATT,GNU,command,natnet,bodyID);
+      commandFilter(MATT,PATT,GNU,command,natnet,bodyID,Optitrack_Status);
 
       pause(0.5);
-
-      %Print the Optitrack location while MATT is moving
-      while(NatNetIsMoving(natnet,1,1) == 1) 
-        NatNetCollect(natnet);
+        
+      
+      %Print the Optitrack location while MATT is moving, if using
+      %optitrack
+      if(Optitrack_Status == 'y')
+          while(NatNetIsMoving(natnet,1,1) == 1) 
+            NatNetCollect(natnet);
+          end
       end
 
     end
